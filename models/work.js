@@ -6,10 +6,10 @@ const workSchema = new mongoose.Schema({
   imageUrl: String,
   author: String,
   url: String,
-  user_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users'
-  }
+  // user_id: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Users'
+  // }
 });
 
 module.exports = mongoose.model('Work', workSchema);
