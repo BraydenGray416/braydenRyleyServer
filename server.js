@@ -29,6 +29,12 @@ app.use(function(req, res, next){
     next();
 });
 
+app.get('/allWork', function(req, res){
+  Work.find().then(result => {
+    res.send(result);
+  })
+})
+
 app.post('/addWorkItem', function(req, res){
     const workItem = new Work({
         _id: new mongoose.Types.ObjectId(),
