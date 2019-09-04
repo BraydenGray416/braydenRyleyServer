@@ -43,6 +43,44 @@ app.post('/addWorkItem', function(req, res){
     }).catch(err => res.send(err));
 });
 
+app.post('/users', function(req, res){
+  Users.findOne({ username : req.body.username }, function (err, checkUser) {
+    if(checkUser){
+      console.log('username already exists');
+    }else{
+      const hash = bcrypt.hashSync(req.body.password);
+      const user = new Users({
+        _id: new mongoose.Types.ObjectId(),
+        username: req.body.username,
+        email: req.body.email,
+        password: hash
+      });
+
+      user.save().then(result => {
+          res.send(result);
+      }).catch(err => res.send(err));
+    }
+  });
+
+});
+
+app.post('/loginUser', function(req, res){
+
+  Users.findOne({ username : req.body.username }, function(err, checkUser){
+    if(checkUser){
+      if(bcrypt.compareSync(req.body.password, checkUser.password)){
+        console.log('password matches');
+        res.send(checkUser);
+      }else {
+        console.log('password does not match');
+        res.send('invalid password');
+      }
+    }else {
+      res.send('invalid user');
+    }
+  });
+});
+
 app.listen(port, () => {
   console.clear();
   console.log(`application is running on port ${port}`)
