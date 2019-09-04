@@ -8,6 +8,9 @@ const bcrypt = require('bcryptjs');
 
 const config = require('./config');
 
+const Work = require('./models/work');
+const Users = require('./models/users');
+
 mongoose.connect(`mongodb+srv://${config.MONGO_USER}:${config.MONGO_PASSWORD}@ryleyscluster-jy7ku.mongodb.net/portfolio?retryWrites=true&w=majority`);
 
 const db = mongoose.connection;
@@ -24,6 +27,20 @@ app.use(cors());
 app.use(function(req, res, next){
     console.log(`${req.method} request for ${req.url}`);
     next();
+});
+
+app.post('/addWorkItem', function(req, res){
+    const workItem = new Work({
+        _id: new mongoose.Types.ObjectId(),
+        title: req.body.title,
+        imageUrl: req.body.imageUrl,
+        author: req.body.author,
+        url: req.body.url,
+    });
+
+    workItem.save().then(result => {
+        res.send(result);
+    }).catch(err => res.send(err));
 });
 
 app.listen(port, () => {
