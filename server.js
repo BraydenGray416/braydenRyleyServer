@@ -42,7 +42,7 @@ app.post('/addWorkItem', function(req, res){
         imageUrl: req.body.imageUrl,
         author: req.body.author,
         url: req.body.url,
-        user_id: req.body.userId
+        user_id: req.body.userID
     });
 
     workItem.save().then(result => {
