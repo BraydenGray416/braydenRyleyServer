@@ -33,7 +33,18 @@ app.get('/allWork', function(req, res){
   Work.find().then(result => {
     res.send(result);
   })
-})
+});
+
+app.post('/product/:id', function(req, res){
+    const id = req.params.id
+    Product.findById(id, function(err, product){
+      if(product['user_id'] == req.body.userId){
+        res.send(product);
+      }else {
+        res.send('401');
+      }
+    });
+});
 
 app.post('/addWorkItem', function(req, res){
     const workItem = new Work({
@@ -42,6 +53,7 @@ app.post('/addWorkItem', function(req, res){
         imageUrl: req.body.imageUrl,
         author: req.body.author,
         url: req.body.url,
+        user_id: req.body.userId
     });
 
     workItem.save().then(result => {
