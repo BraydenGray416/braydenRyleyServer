@@ -42,7 +42,7 @@ app.post('/addWorkItem', function(req, res){
         imageUrl: req.body.imageUrl,
         author: req.body.author,
         url: req.body.url,
-        user_id: req.body.userId
+        user_id: req.body.userID
     });
 
     workItem.save().then(result => {
@@ -71,10 +71,10 @@ app.post('/users', function(req, res){
 
 });
 
-app.post('/product/:id', function(req, res){
+app.post('/work/:id', function(req, res){
   const id = req.params.id;
   Work.findById(id, function (err, work) {
-    if (work.user_id == req.body.userId) {
+    if (work.user_id == req.body.userID) {
     res.send(work);
   } else {
     res.send('401');
