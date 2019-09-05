@@ -70,6 +70,17 @@ app.post('/users', function(req, res){
 
 });
 
+app.post('/product/:id', function(req, res){
+  const id = req.params.id;
+  Work.findById(id, function (err, work) {
+    if (work.user_id == req.body.userId) {
+    res.send(work);
+  } else {
+    res.send('401');
+  }
+  });
+});
+
 app.post('/loginUser', function(req, res){
 
   Users.findOne({ username : req.body.username }, function(err, checkUser){
