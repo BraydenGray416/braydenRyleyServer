@@ -35,17 +35,6 @@ app.get('/allWork', function(req, res){
   })
 });
 
-app.post('/product/:id', function(req, res){
-    const id = req.params.id
-    Product.findById(id, function(err, product){
-      if(product['user_id'] == req.body.userId){
-        res.send(product);
-      }else {
-        res.send('401');
-      }
-    });
-});
-
 app.post('/addWorkItem', function(req, res){
     const workItem = new Work({
         _id: new mongoose.Types.ObjectId(),
