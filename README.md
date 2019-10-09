@@ -4,6 +4,6 @@ Clone down the project and direct into the files through your chosen Terminal. M
 ```
 npm install
 ```
-Once the node modules are installed, open up the files in your chosen code editor and rename the **configExample.json** to **config.json**. Inside the newly renamed file, enter in the login for the Mongo database. For this, enter in **guest** for the username and **yoobee** for the password.
+Once the node modules are installed, open up the files in your chosen code editor and rename the **configExample.json** to **config.json**. Inside the newly renamed file, enter in the login for the Mongo database.
 
 From here, you should be good to go.
